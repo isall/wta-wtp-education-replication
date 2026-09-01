@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use these materials, please cite the archived replication package."
+type: dataset
+title: "Valuing education for limited-resource audiences using a willingness to accept experiment - replication data and code"
+version: 1.0.0
+doi: 10.5281/zenodo.22134188
+repository-code: "https://github.com/isall/wta-wtp-education-replication"
+abstract: "De-identified data, documentation, and figures are released under CC BY 4.0; analysis code (Stata, R, and Python scripts) under the MIT License. See README.txt and the license files."
+authors:
+  - family-names: "Sall"
+    given-names: "Ibrahima"
+    orcid: "https://orcid.org/0000-0002-7526-636X"
+    affiliation: "The University of Arizona"
+  - family-names: "Tronstad"
+    given-names: "Russell"
+    orcid: "https://orcid.org/0000-0002-3725-099X"
+    affiliation: "The University of Arizona"

@@ -1,0 +1,30 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+
+# Stata run artifacts (generated when running the scripts from data/)
+*.smcl
+data/logs/
+data/First_table_*
+data/Sample_table_*
+data/Sample_Oprobit_*
+data/Linear_Full_*
+data/Oprobit_FullModel_*
+data/Ologit_FullModel_*
+data/MarginalEffects_*
+data/*_tokens/
+# root-level output of code/relabel_tables.py when invoked as in README step 2
+/data_tokens/
+
+# Regenerated figures (published versions are tracked in figures/)
+data/Fig4.tif
+data/Fig5.tif
+
+# R session artifacts
+.Rhistory
+.RData
+.Rproj.user/
+
+# Python artifacts
+__pycache__/
+*.pyc

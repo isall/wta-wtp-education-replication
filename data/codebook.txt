@@ -1,0 +1,282 @@
+=====================================================================
+CODEBOOK -- analysis_data_deidentified (WTA education study)
+=====================================================================
+
+ABOUT THE DEPOSITED DATA
+------------------------
+The de-identified analysis dataset contains 118 questionnaire records and 36
+deposited input columns. Each row represents one questionnaire record. The
+file used by the main Stata analysis is analysis_data_deidentified.dta; the CSV
+file is an open-format copy of the same data.
+
+The two training locations are represented by the neutral labels
+"small_town" and "rural_area". These labels do not disclose the actual
+locations. A period (.) means that a value is missing.
+
+The Stata analysis script drops the four records that have no one-way mileage,
+leaving 114 records before other variable-specific missing values are taken
+into account. Part 1 documents the columns stored in the deposited files.
+Part 2 documents variables that the Stata script creates during analysis.
+
+
+PART 1 -- COLUMNS IN THE DEPOSITED DATA
+---------------------------------------
+The entries below follow the actual column order in the deposited data. Before
+and after versions of the same questionnaire item are grouped together, but
+every deposited column name is shown exactly once.
+
+No.    Deposited column(s)             Plain-language meaning and stored values
+-----  ------------------------------  -----------------------------------------
+1      year                            Year in which the training was held:
+                                       2019, 2020, or 2021.
+
+2      collect_location                Privacy-protected training-site category:
+                                       "small_town" or "rural_area".
+
+3      travel_miles_class              One-way distance traveled to the training,
+                                       in miles. Nonmissing values in the
+                                       deposited data range from 1 to 445.
+
+4      travel_alone                    Travel-party description. "self" means
+                                       the respondent traveled alone. "1 other",
+                                       "2 other", and ">= 3 other" indicate the
+                                       number of other people traveling with the
+                                       respondent.
+
+5      cost_cover                      Who paid the travel costs:
+                                       "By myself",
+                                       "By an organization or employer", or
+                                       "By other family members".
+
+6      classification                  Farming or ranching experience and future
+                                       interest. Standard responses distinguish
+                                       farming or ranching for less than or more
+                                       than 10 years and interest in beginning
+                                       someday. The file also contains an
+                                       "Other" category with text responses.
+
+7      education                       Highest reported education:
+                                       "High School",
+                                       "Some Technical College",
+                                       "Associates Degree",
+                                       "Bachelor Degree", or
+                                       "Graduate Degree".
+
+8      age                             Reported age group:
+                                       "< 20 yrs", "20-24 yrs", "25-34 yrs",
+                                       "35-44 yrs", "45-54 yrs", "55-64 yrs",
+                                       or ">= 65 yrs".
+
+9      gender                          Reported gender: "Male", "Female", or
+                                       "Other".
+
+10     A_dollars_accept                Willingness to accept (WTA): the lowest
+                                       payment the respondent said they would
+                                       accept to attend the training. Stored
+                                       dollar amounts are 25, 50, 71.5, 100,
+                                       125, 250, or 500.
+
+11     B_wtp_workshop                  Willingness to pay (WTP): the amount the
+                                       respondent said they would pay to attend.
+                                       Nonmissing amounts in the deposited data
+                                       range from $5 to $250.
+
+12-13  topic1_before                   Self-rated knowledge of general topic 1,
+       topic1_after                    recorded before and after the training.
+                                       Ratings use a numeric scale from 1 to 5.
+
+14-15  topic2_before                   Self-rated knowledge of general topic 2,
+       topic2_after                    recorded before and after the training.
+                                       Ratings use a numeric scale from 1 to 5.
+
+16-17  topic3_before                   Self-rated knowledge of general topic 3,
+       topic3_after                    recorded before and after the training.
+                                       Ratings use a numeric scale from 1 to 5.
+
+18-19  topic4_before                   Self-rated knowledge of general topic 4,
+       topic4_after                    recorded before and after the training.
+                                       Ratings use a numeric scale from 1 to 5.
+
+20     overall_after                   Overall post-training rating. Ratings use
+                                       a numeric scale from 1 to 5.
+
+21-22  cattle_handling_be              Self-rated knowledge of the cattle-handling
+       cattle_handling_af              skill item, before and after the training.
+                                       Ratings use a numeric scale from 1 to 5.
+
+23-24  bull_exam_be                    Self-rated knowledge of the bull-examination
+       bull_exam_af                    skill item, before and after the training.
+                                       Ratings use a numeric scale from 1 to 5.
+
+25-26  vaccine_be                      Self-rated knowledge of the vaccine skill
+       vaccine_af                      item, before and after the training. Ratings
+                                       use a numeric scale from 1 to 5.
+
+27-28  heifer_be                       Self-rated knowledge of the heifer skill
+       heifer_af                       item, before and after the training. Ratings
+                                       use a numeric scale from 1 to 5.
+
+29-30  breeding_be                     Self-rated knowledge of the breeding skill
+       breeding_af                     item, before and after the training. Ratings
+                                       use a numeric scale from 1 to 5.
+
+31-32  testing_be                      Self-rated knowledge of the testing skill
+       testing_af                      item, before and after the training. Ratings
+                                       use a numeric scale from 1 to 5.
+
+33-34  marketing_be                    Self-rated knowledge of the marketing skill
+       marketing_af                    item, before and after the training. Ratings
+                                       use a numeric scale from 1 to 5.
+
+35     class_improve_reality           Whether the respondent believed the
+                                       training would improve the likelihood of
+                                       success. Stored responses are
+                                       "Definitely", "Probably", and "Maybe".
+
+36     class_influence_future          How the training affected the respondent's
+                                       future farming intentions. Stored responses
+                                       are "Solidified current commitment to
+                                       farming", "Definitely like to start some
+                                       day", "No change/ Undecided", and
+                                       "Convinced me not to farm".
+
+
+PART 2 -- VARIABLES CREATED FOR REPORTED ANALYSES
+-------------------------------------------------
+The variables in this part are not additional columns in the deposited input
+files. The Stata script creates them after loading the data. A 0/1 variable is
+a yes-or-no indicator: 1 means the stated condition is met, and 0 means it is
+not. A missing source response generally produces a missing constructed value.
+
+Analysis variable [article label]   Meaning, construction, and use
+----------------------------------  --------------------------------------------------------------
+WTA [WTA, $]                        Lowest payment the respondent said they would accept to attend
+                                    the training. It is copied from A_dollars_accept and is the
+                                    outcome variable in Tables 1-4 and the article text.
+
+WTP [WTP, $]                        Amount the respondent said they would pay to attend. It is
+                                    copied from B_wtp_workshop and is used in Tables 1-2 and the
+                                    article text.
+
+WTP_log [Ln(WTP)]                   Natural logarithm of WTP: ln(WTP). It is used in Tables 2-4.
+                                    All nonmissing WTP values in the deposited data are greater
+                                    than zero.
+
+no_ppl [Npeople, 1-4]               Number of people in the travel party, including the respondent:
+                                    "self" = 1, "1 other" = 2, "2 other" = 3, and three or more
+                                    others = 4. It is used in Table 1, travel-cost calculations,
+                                    and the article text.
+
+mileage [Nmiles, mi]                Reported one-way mileage, copied from travel_miles_class after
+                                    records with missing mileage are removed. It is used in Table 1,
+                                    travel-cost calculations, and the article text.
+
+total_travelcost [TravC, $]         Estimated round-trip vehicle cost plus the estimated value of
+                                    round-trip travel time. A concise calculation summary appears
+                                    below; exact intermediate variables and assignments are in the
+                                    Stata script. It is used in Tables 1-3, marginal effects, and
+                                    the article text.
+
+cost_attendance [OPCattend, $]      Estimated opportunity cost of six hours spent at the training,
+                                    valued at one-third of the assigned median hourly wage. It is
+                                    set to 0 when an organization or employer paid and is used in
+                                    Table 1.
+
+cost_day [TotC, $]                  Total daily cost: total_travelcost + cost_attendance. It is used
+                                    in Tables 1-2.
+
+AdjWTAtcost [WTA - TravC, $]        WTA adjusted for travel cost: WTA - total_travelcost. When an
+                                    organization or employer paid the travel cost, the adjusted
+                                    value is set equal to WTA. It is used in Table 1, a ratio, and
+                                    the article text.
+
+AdjWTPtcost [WTP + TravC, $]        WTP adjusted for travel cost: WTP + total_travelcost. When an
+                                    organization or employer paid the travel cost, the adjusted
+                                    value is set equal to WTP. It is used in Table 1, a ratio, and
+                                    the article text.
+
+DBegFarm [DBegFarm, 0/1]            Beginning-or-intending producer indicator. It equals 1 for
+                                    "Been Farming less than 10 years", "Been Ranching less than
+                                    10 years", "Interested in Farming Someday", or "Interested in
+                                    Ranching Someday". It equals 0 for other nonmissing
+                                    classifications. It is used in Tables 1-4 and the text.
+
+avgknowledge_be                     Average of the available nonmissing ratings among the four
+[AvgKnowBef, 1-5]                   general-topic before items and seven skill before items. If all
+                                    11 before ratings are missing, the average is missing. It is
+                                    used in Tables 1-4 and the article text.
+
+avgknowledge_af                     Average of the available nonmissing ratings among the four
+[AvgKnowAft, 1-5]                   general-topic after items and seven skill after items. If all
+                                    11 after ratings are missing, the average is missing. It is
+                                    used in Tables 1-4 and the article text.
+
+edu_yrs [Education, yrs]            Education recoded as years: High School = 12; Some Technical
+                                    College = 14; Associates Degree = 14; Bachelor Degree = 16;
+                                    Graduate Degree = 20. It is used in Table 1, Table 3, and text.
+
+d_male [Male, 0/1]                  Equals 1 for "Male" and 0 for "Female" or "Other". A missing
+                                    gender remains missing. It is used in Table 1, Table 3, and
+                                    text.
+
+age_num [Age, yrs]                  Age group represented by a selected age in years:
+                                    <20 = 18; 20-24 = 22; 25-34 = 29.5; 35-44 = 39.5;
+                                    45-54 = 49.5; 55-64 = 59.5; and >=65 = 70. It is used in
+                                    Table 1, Table 3, and the article text.
+
+ratio_WTA_WTP                       Unadjusted ratio: WTA / WTP. It is reported in the article
+                                    text.
+
+ratio_adj_WTA_WTP                   Travel-cost-adjusted ratio: AdjWTAtcost / AdjWTPtcost. It is
+                                    reported in the article text.
+
+enhance_success [0/1]               Perceived-benefit indicator used in the S1 Table robustness
+                                    analysis. It equals 1 for "Definitely" and 0 for "Probably"
+                                    or "Maybe" on class_improve_reality.
+
+influ_future [0/1]                  Future-intention indicator used in the S1 Table robustness
+                                    analysis. It equals 1 for "Solidified current commitment to
+                                    farming" and 0 for the other three nonmissing responses to
+                                    class_influence_future.
+
+
+ESSENTIAL CONSTRUCTION AND SAMPLE NOTES
+---------------------------------------
+
+- total_travelcost combines the respondent's share of round-trip vehicle cost
+  with the estimated value of round-trip travel time:
+
+      vehicle-cost share = ((mileage * 2) / no_ppl) * per-mile rate
+      travel-time value = (2 * mileage / avg_speed) * (med_hour_wage / 3)
+      total_travelcost = vehicle-cost share + travel-time value
+
+  The per-mile rate is $0.62 for 2019 and $0.64 for 2020 and 2021. The script
+  treats all small_town records as respondent-paid for this calculation. When
+  an organization or employer paid, total_travelcost is set to 0. The exact
+  site-specific speed equations and hourly wage assignments by education,
+  gender, and year are documented in
+  code/WTA_education_analysis_repository.do.
+
+- The four records with missing one-way mileage are removed, reducing the
+  analysis data from 118 to 114 records before other variables are created.
+  Variable-specific missing values can further reduce the number of records in
+  an individual table or model.
+
+- avgknowledge_be and avgknowledge_af average whichever of the relevant 11
+  ratings are available for a record. They do not require all 11 ratings to be
+  nonmissing; the average is missing only when all 11 ratings are missing.
+
+- The S1 Table robustness comparison uses records with nonmissing values for
+  both enhance_success and influ_future.
+
+- The labels in square brackets are assigned by
+  code/WTA_education_analysis_repository.do. The relabel_tables.py helper uses
+  them in exported tables without changing numeric data cells.
+
+- Supporting variables used only as intermediate calculation steps are not
+  listed separately. Their exact definitions and implementation are documented
+  in code/WTA_education_analysis_repository.do. Temporary sample markers,
+  residuals, predicted values, and stored estimation objects are also omitted.
+
+- All formulas, mappings, article labels, and result locations describe the
+  de-identified data and analysis script included in this repository.
